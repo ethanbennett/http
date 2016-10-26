@@ -1,12 +1,10 @@
 class Output
   attr_reader   :client,
-                :parser,
-                :request_lines
+                :parser
 
-  def initialize(client, parser, request_lines)
+  def initialize(client, parser)
     @client        = client
     @parser        = parser
-    @request_lines = request_lines
   end
 
   def response_strings

@@ -5,11 +5,9 @@ require_relative 'output'
 
 class Server
   attr_reader     :tcp_server, :client
-  attr_accessor   :request_lines,
-                  :counter
+  attr_accessor   :counter
 
   def initialize
-    @request_lines = []
     @counter = 0
     @tcp_server = TCPServer.new(9292)
   end
@@ -17,21 +15,30 @@ class Server
   def run
     loop do
       @client = tcp_server.accept
-      @counter += 1
-      parser = Parser.new(server_something, @counter )
-      output = Output.new(client, parser, @request_lines)
-      output.response_strings
+      requests
       client.close
     end
   end
+
+  def requests
+    @counter += 1
+    parser = Parser.new(get_request, @counter)
+    output = Output.new(client, parser)
+    result(output)
+  end
   
-  def server_something
+  def get_request
     request_lines = []
       while line = client.gets and !line.chomp.empty?
         request_lines << line.chomp
       end
-       @request_lines =  request_lines
-       end
+    request_lines
+  end
+
+  def result(output)
+    output.response_strings
+  end
+
 end
 
 

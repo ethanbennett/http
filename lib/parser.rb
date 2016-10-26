@@ -18,7 +18,7 @@ class Parser
     if path == "/hello"
       "Hello, world! #{counter}"
     elsif path == "/"
-      nil
+      "Gif embedded here"
     elsif path == "/datetime"
       Time.now.strftime('%I:%M %p on %A, %b %d, %Y')
     elsif path == "/shutdown"
