@@ -16,13 +16,13 @@ class Parser
 
   def paths
     if path == "/hello"
-      special = "Hello, world! #{counter}"
+      "Hello, world! #{counter}"
     elsif path == "/"
-      special = nil
+      nil
     elsif path == "/datetime"
-      special = Time.now.strftime('%I:%M %p on %A, %b %d, %Y')
-    elsif path == "shutdown"
-      special == "#{counter}"
+      Time.now.strftime('%I:%M %p on %A, %b %d, %Y')
+    elsif path == "/shutdown"
+      "#{counter}"
     else
       "404"  
     end
