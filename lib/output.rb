@@ -6,12 +6,11 @@ class Output
   def initialize(client, parser, request_lines)
     @client        = client
     @parser        = parser
-    @request_lines =  request_lines
+    @request_lines = request_lines
   end
-  
-  def response
-    response = "<pre>" + request_lines.join("\n") + "</pre>"
-    output = "<html><head></head><h1>#{parser.paths}</h1><body>#{response}</body></html>
+
+  def response_strings
+    output = "<html><head></head><h1>#{parser.paths}</h1></html>
       <pre>
       Verb: #{parser.verb}
       Path: #{parser.path}
@@ -26,6 +25,10 @@ class Output
               "server: ruby",
               "content-type: text/html; charset=iso-8859-1",
               "content-length: #{output.length}\r\n\r\n"].join("\r\n")
+    response(headers, output)
+  end
+
+  def response(headers, output)
     client.puts headers
     client.puts output
   end
