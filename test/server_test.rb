@@ -10,7 +10,6 @@ class ServerTest < Minitest::Test
     assert_equal 200, response.status
   end
 
-
   def test_hello_path_outputs_proper_message
     response = Faraday.get("http://localhost:9292/hello")
     parser = Parser.new(response.body, nil)
@@ -20,7 +19,6 @@ class ServerTest < Minitest::Test
   def test_datetime_outputs_proper_message
     response = Faraday.get("http://localhost:9292/datetime")
     parser = Parser.new(response.body, nil)
-    # require 'pry'; binding.pry
     assert_equal true, response.body.include?("Oct") && response.body.include?("2016")
   end
 
