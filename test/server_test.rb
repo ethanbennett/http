@@ -13,14 +13,14 @@ class ServerTest < Minitest::Test
 
   def test_hello_path_outputs_proper_message
     response = Faraday.get("http://localhost:9292/hello")
-    parser = Parser.new(response.body)
+    parser = Parser.new(response.body, nil)
     assert_equal true, response.body.include?("Hello, world!")
   end
 
   def test_datetime_outputs_proper_message
     response = Faraday.get("http://localhost:9292/datetime")
-    parser = Parser.new(response.body)
-    require 'pry'; binding.pry
+    parser = Parser.new(response.body, nil)
+    # require 'pry'; binding.pry
     assert_equal true, response.body.include?("Oct") && response.body.include?("2016")
   end
 
