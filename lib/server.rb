@@ -1,59 +1,51 @@
 require 'socket'
-require 'pry'
-require 'faraday'
+require_relative 'parser'
 
-class WebSocketServer
-  #  attr_accessor :client,
-  #                :tcp_server,
-  #                :counter
-
-  # def initialize(options={path: '/', port: 9292, host: 'localhost'})
-  #   @path, port, host = options[:path], options[:port], options[:host]
-  #   @counter = 0
-  # end
-
-  # Does initializing the class allow for the possibility
-  # of adding a new path?
-
-  @tcp_server = TCPServer.new(9292)
-  @client = @tcp_server.accept
+  tcp_server = TCPServer.new(9292)
+  client = tcp_server.accept
   counter = 0
 
-  # binding.pry
-
   puts "Ready for a request"
-  request_lines = []
-  while line = @client.gets and !line.chomp.empty?
-    request_lines << line.chomp
+  @request_lines = []
+  while line = client.gets and !line.chomp.empty?
+    @request_lines << line.chomp
+    counter += 1
   end
 
+  parser = HTTPParser.new(@request_lines)
+    if parser.path == "/hello"
+      special = "Hello, world! (#{counter})"
+    elsif parser.path == "/"
+      special = nil
+    elsif parser.path == "/datetime"
+      special = Time.now.strftime('%I:%M %p on %A, %b %d, %Y')
+    elsif parser.path == "shutdown"
+      special = counter
+    end
+
   puts "Got this request:"
-  puts request_lines.inspect
+  puts @request_lines.inspect
 
   puts "Sending response."
-  counter += 1
-  response = "<pre>" + request_lines.join("\n") + "</pre>"
-  output = "<html><head><h1>Hello, world (#{counter})</h1></head><body>#{response}</body></html>
-  <pre>
-  Verb: POST
-  Path: /
-  Protocol: HTTP/1.1
-  Host: 127.0.0.1
-  Port: 9292
-  Origin: 127.0.0.1
-  Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-  </pre>"
+  response = "<pre>" + @request_lines.join("\n") + "</pre>"
+  output = "<html><head></head><h1>#{special}</h1><body>#{response}</body></html>
+    <pre>
+    Verb: #{parser.verb}
+    Path: #{parser.path}
+    Protocol: #{parser.protocol}
+    Host: #{parser.host}
+    Port: 9292
+    Origin: localhost
+    Accept: #{parser.accept}
+    </pre>"
   headers = ["http/1.1 200 ok",
             "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
             "server: ruby",
             "content-type: text/html; charset=iso-8859-1",
             "content-length: #{output.length}\r\n\r\n"].join("\r\n")
-  @client.puts headers
-  @client.puts output
+  client.puts headers
+  client.puts output
 
   puts ["Wrote this response:", headers, output].join("\n")
-  @client.close
+  client.close
   puts "\nResponse complete, exiting."
-
-
-  end
