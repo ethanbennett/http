@@ -1,6 +1,4 @@
-
-
-class HTTPParser
+class Parser
   attr_reader   :host,    :verb,
                 :path,    :protocol,
                 :accept 
@@ -12,5 +10,4 @@ class HTTPParser
     @protocol      = request_lines[0].split(" ")[2]
     @accept        = request_lines[3..5]
   end
-
 end
