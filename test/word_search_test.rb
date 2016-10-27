@@ -8,7 +8,7 @@ class WordSearchTest < Minitest::Test
   def test_it_passes_a_path_in
     response = Faraday.get("http://localhost:9292/wordsearch?word=word")
     parser = Parser.new(response.body, nil)
-    assert_equal true, response.body.include?("word")
+    assert_equal true, response.body.include?("?")
   end
 
   def test_it_accurately_checks_words
