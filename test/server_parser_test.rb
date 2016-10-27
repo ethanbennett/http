@@ -13,6 +13,7 @@ class ServerTest < Minitest::Test
 
   def test_counter_gets_passed_in
     response = Faraday.get("http://localhost:9292/shutdown")
+    # skip
     parser = Parser.new(response.body, 1500)
     assert_equal 1500, parser.counter
   end
@@ -38,6 +39,7 @@ class ServerTest < Minitest::Test
   end
 
   def test_shutdown_displays_count
+    # skip
     response = Faraday.get("http://localhost:9292/shutdown")
     parser = Parser.new(response.body, nil)
     assert_equal true, response.body.include?("Count:")

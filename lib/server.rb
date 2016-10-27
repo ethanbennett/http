@@ -21,24 +21,24 @@ class Server
     end
   end
 
+  def get_request
+    request_lines = []
+    while line = client.gets and !line.chomp.empty?
+      request_lines << line.chomp
+    end
+  request_lines
+end
+
   def requests
     @counter += 1
     @parser = Parser.new(get_request, @counter)
     output = Output.new(client, @parser)
     result(output)
   end
-  
-  def get_request
-    request_lines = []
-      while line = client.gets and !line.chomp.empty?
-        request_lines << line.chomp
-      end
-    request_lines
-  end
 
   def result(output)
     output.response_strings
-    @looper = false if @parser.paths == "Count: #{counter}"
+    #@looper = false if @parser.paths == "Count: #{counter}"
   end
 end
 
