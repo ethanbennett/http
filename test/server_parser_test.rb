@@ -51,4 +51,14 @@ class ServerTest < Minitest::Test
     assert_equal true, response.body.include?("404")
   end
 
+  def test_word_search_outputs_proper_message
+    response = Faraday.get("http://localhost:9292/wordsearch?word=word")
+    response_2 = Faraday.get("http://localhost:9292/wordsearch?word=wor")
+    parser = Parser.new(response.body, nil)
+    parser_2 = Parser.new(response_2.body, nil)
+    assert_equal true, response.body.include?("WORD is a known word")
+    assert_equal true, response_2.body.include?("WOR is not a known word")
+  end
+
+
 end
