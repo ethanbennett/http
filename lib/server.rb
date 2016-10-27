@@ -23,7 +23,7 @@ class Server
 
   def requests
     @counter += 1
-    @parser = Parser.new(get_request, @counter, @looper)
+    @parser = Parser.new(get_request, @counter)
     output = Output.new(client, @parser)
     result(output)
   end
@@ -38,7 +38,7 @@ class Server
 
   def result(output)
     output.response_strings
-    @looper = false if @parser.paths == "#{counter}"
+    @looper = false if @parser.paths == "Count: #{counter}"
   end
 end
 

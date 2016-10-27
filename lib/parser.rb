@@ -3,7 +3,7 @@ class Parser
                 :path,    :protocol,
                 :accept,  :counter
 
-  def initialize(request_lines, counter, looper)
+  def initialize(request_lines, counter)
     @host          = request_lines[1].split(" ")[1]
     @verb          = request_lines[0].split(" ")[0]
     @path          = request_lines[0].split(" ")[1]
@@ -16,11 +16,11 @@ class Parser
     if path == "/hello"
       "Hello, world! #{counter}"
     elsif path == "/"
-      "Gif embedded here"
+      "Root"
     elsif path == "/datetime"
       Time.now.strftime('%I:%M %p on %A, %b %d, %Y')
     elsif path == "/shutdown"
-      "#{counter}"
+      "Count: #{counter}"
     else
       "404"  
     end
