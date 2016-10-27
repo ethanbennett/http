@@ -19,7 +19,7 @@ class Parser
     if path == "/hello"
       "Hello, world! #{counter}"
     elsif path == "/"
-      "<iframe src=\"//giphy.com/embed/YfO8X3PfSmuyY\" width=\"240\" height=\"390\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe><p><a href=\"http://giphy.com/gifs/paul-rudd-tim-and-eric-celery-man-YfO8X3PfSmuyY\"></a></p>Root!!!"
+      "<iframe src=\"//giphy.com/embed/YfO8X3PfSmuyY\" width=\"240\" height=\"390\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe><p><a href=\"http://giphy.com/gifs/paul-rudd-tim-and-eric-celery-man-YfO8X3PfSmuyY\"></a></p>Root"
     elsif path == "/datetime"
       Time.now.strftime('%I:%M %p on %A, %b %d, %Y')
     elsif path == "/shutdown"
@@ -30,4 +30,5 @@ class Parser
       "<iframe src=\"//giphy.com/embed/TUc0ZkK15eiTC\" width=\"480\" height=\"270\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe><p><a href=\"http://giphy.com/gifs/wtf-tim-and-eric-wut-TUc0ZkK15eiTC\"></a></p>404!!!"  
     end
   end
+
 end

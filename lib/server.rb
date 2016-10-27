@@ -5,12 +5,13 @@ require_relative 'output'
 
 class Server
   attr_reader     :client
-  attr_accessor   :counter,    :looper
+  attr_accessor   :counter,
+                  :looper
 
   def initialize
-    @counter = 0
+    @counter    = 0
     @tcp_server = TCPServer.new(9292)
-    @looper = true
+    @looper     = true
   end
 
   def run
@@ -21,24 +22,24 @@ class Server
     end
   end
 
+  def requests
+    @counter += 1
+    @parser   = Parser.new(get_request, @counter)
+    output    = Output.new(client, @parser)
+    result(output)
+  end
+
   def get_request
     request_lines = []
     while line = client.gets and !line.chomp.empty?
       request_lines << line.chomp
     end
-  request_lines
-end
-
-  def requests
-    @counter += 1
-    @parser = Parser.new(get_request, @counter)
-    output = Output.new(client, @parser)
-    result(output)
+    request_lines
   end
 
   def result(output)
     output.response_strings
-    #@looper = false if @parser.paths == "Count: #{counter}"
+    @looper = false if @parser.paths == "Count: #{counter}"  # Comment this line out before running tests
   end
 end
 

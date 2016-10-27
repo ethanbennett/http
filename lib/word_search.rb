@@ -16,7 +16,7 @@ class WordSearch
   end
 
   def dictionary
-    reader = File.read("/usr/share/dict/words")
+    reader     = File.read("/usr/share/dict/words")
     dictionary = reader.split(" ")
   end
 
