@@ -55,5 +55,9 @@ class ServerTest < Minitest::Test
     assert_equal true, response_2.body.include?("WOR is not a known word")
   end
 
-
+  def test_game_returns_output_string
+    response   = Faraday.get("http://localhost:9292/game?num=45")
+    parser     = Parser.new(response.body, nil, 83)
+    assert_equal true, response.body.include?("guess")
+  end
 end

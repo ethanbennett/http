@@ -41,7 +41,7 @@ class Server
 
   def result(output)
     output.response_strings
-    @looper = false if @parser.paths == "Count: #{counter}"  # Comment this line out before running tests
+    @looper = false if @parser.paths.include?("Count: #{counter}")  # Comment this line out before running tests
   end
 end
 

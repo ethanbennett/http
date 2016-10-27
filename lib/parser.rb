@@ -29,7 +29,7 @@ class Parser
     elsif path.include?("/wordsearch")
       WordSearch.new(path).go
     elsif path.include?("/game")
-      Game.new(number, path).play
+      Game.new(number, path).play 
     else
       "<iframe src=\"//giphy.com/embed/TUc0ZkK15eiTC\" width=\"480\" height=\"270\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe><p><a href=\"http://giphy.com/gifs/wtf-tim-and-eric-wut-TUc0ZkK15eiTC\"></a></p>404!!!"  
     end
