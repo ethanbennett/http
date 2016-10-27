@@ -4,7 +4,8 @@ require_relative 'parser'
 require_relative 'output'
 
 class Server
-  attr_reader     :client
+  attr_reader     :client,
+                  :number
   attr_accessor   :counter,
                   :looper
 
@@ -12,6 +13,7 @@ class Server
     @counter    = 0
     @tcp_server = TCPServer.new(9292)
     @looper     = true
+    @number     = rand(100)
   end
 
   def run
@@ -24,7 +26,7 @@ class Server
 
   def requests
     @counter += 1
-    @parser   = Parser.new(get_request, @counter)
+    @parser   = Parser.new(get_request, @counter, @number)
     output    = Output.new(client, @parser)
     result(output)
   end

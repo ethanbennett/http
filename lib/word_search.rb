@@ -21,7 +21,7 @@ class WordSearch
   end
 
   def word
-    @path.split("?")[1].split("=")[1]
+    path.split("?")[1].split("=")[1]
   end
 
   def known  
