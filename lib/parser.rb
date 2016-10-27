@@ -1,7 +1,6 @@
 require './lib/word_search'
 
 class Parser
-
   attr_reader   :host,    :verb,
                 :path,    :protocol,
                 :accept,  :counter
