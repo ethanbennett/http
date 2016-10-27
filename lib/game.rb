@@ -8,7 +8,7 @@ class Game
   end
 
   def play
-    if guess >  number
+    if guess > number
       too_high
     elsif guess <  number
       too_low
