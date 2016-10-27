@@ -1,4 +1,7 @@
+require './lib/word_search'
+
 class Parser
+
   attr_reader   :host,    :verb,
                 :path,    :protocol,
                 :accept,  :counter
@@ -22,7 +25,7 @@ class Parser
     elsif path == "/shutdown"
       "Count: #{counter}"
     elsif path.include?("/wordsearch")
-      "Here's where the word search will go."
+      WordSearch.new(path).go
     else
       "<iframe src=\"//giphy.com/embed/TUc0ZkK15eiTC\" width=\"480\" height=\"270\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe><p><a href=\"http://giphy.com/gifs/wtf-tim-and-eric-wut-TUc0ZkK15eiTC\"></a></p>404!!!"  
     end
