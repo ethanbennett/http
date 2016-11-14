@@ -9,9 +9,9 @@ class WordSearch
 
   def go
     if dictionary.include?(word)
-      known
+      "#{word.upcase} is a known word."
     else
-      unknown
+      "#{word.upcase} is not a known word."
     end
   end
 
@@ -23,13 +23,4 @@ class WordSearch
   def word
     path.split("?")[1].split("=")[1]
   end
-
-  def known  
-    "#{word.upcase} is a known word."
-  end
-
-  def unknown
-    "#{word.upcase} is not a known word."
-  end
-
 end

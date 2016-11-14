@@ -7,13 +7,16 @@ class Server
   attr_reader     :client,
                   :number
   attr_accessor   :counter,
-                  :looper
+                  :looper,
+                  :number,
+                  :game_counter
 
   def initialize
     @counter    = 0
+    @game_counter = 0
     @tcp_server = TCPServer.new(9292)
     @looper     = true
-    @number     = rand(100)
+    @number     = Random.rand(100)
   end
 
   def run
@@ -26,7 +29,7 @@ class Server
 
   def requests
     @counter += 1
-    @parser   = Parser.new(get_request, @counter, @number)
+    @parser   = Parser.new(self, get_request)
     output    = Output.new(client, @parser)
     result(output)
   end
@@ -41,7 +44,7 @@ class Server
 
   def result(output)
     output.response_strings
-    @looper = false if @parser.paths.include?("Count: #{counter}")  # Comment this line out before running tests
+    # @looper = false if @parser.paths.include?("Count: #{counter}")  # Comment this line out before running tests
   end
 end
 
