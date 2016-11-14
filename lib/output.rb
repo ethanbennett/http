@@ -8,16 +8,16 @@ class Output
   end
 
   def response_strings
-    output = "<html><head></head><h1>#{parser.paths}</h1></html>
-      <pre>
-      Verb: #{parser.verb}
-      Path: #{parser.path}
-      Protocol: #{parser.protocol}
-      Host: #{parser.host}
-      Port: 9292
-      Origin: localhost
-      Accept: #{parser.accept}
-      </pre>"
+    output =  "<html><head></head><h1>#{parser.paths}</h1></html>
+              <pre>
+              Verb: #{parser.verb}
+              Path: #{parser.path}
+              Protocol: #{parser.protocol}
+              Host: #{parser.host}
+              Port: 9292
+              Origin: localhost
+              Accept: #{parser.accept}
+              </pre>"
     headers = ["http/1.1 200 ok",
               "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
               "server: ruby",

@@ -59,11 +59,12 @@ module GameSetup
   end
 
   def correct_guess_response
-    reset_variables
-    "<pre>
+    response = "<pre>
     <br/>You guessed correctly!
     <br/>It took you this many tries: #{guess_counter}
     </pre>"
+    reset_variables
+    response
   end
 
   def reset_variables

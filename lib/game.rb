@@ -16,13 +16,13 @@ class Game
   end
 
   def go
-    increase_count
-    if correct_guess
-      correct_guess_response 
-    elsif low_guess
+    increase_count 
+    if low_guess
       low_guess_response
     elsif high_guess
       high_guess_response
+    elsif correct_guess
+      correct_guess_response
     end
   end
   
