@@ -1,39 +1,41 @@
 require './lib/word_search'
 require './lib/game'
+require './lib/parser_setup'
 
 class Parser
+  include ParserSetup
+  
   attr_reader   :host,    :verb,
                 :path,    :protocol,
                 :accept,  :counter,
-                :full_request,
-                :server
+                :server,  :full_request
 
   def initialize(server, request_lines)
     @server        = server
     @full_request  = request_lines
-    @host          = request_lines[1].split(" ")[1]
-    @verb          = request_lines[0].split(" ")[0]
-    @path          = request_lines[0].split(" ")[1]
-    @protocol      = request_lines[0].split(" ")[2]
-    @accept        = request_lines[3..5]
+    @host          = host_finder
+    @verb          = verb_finder
+    @path          = path_finder
+    @protocol      = protocol_finder
+    @accept        = accept_finder
     @counter       = server.counter
   end
 
   def paths
-    if path == "/hello"
-      "Hello, world! #{counter}"
-    elsif path == "/"
-      "Root"
+    if path    == "/"
+      root
+    elsif path == "/hello"
+      hello
     elsif path == "/datetime"
-      Time.now.strftime('%I:%M %p on %A, %b %d, %Y')
+      datetime
     elsif path == "/shutdown"
-      "Count: #{counter}"
+      shutdown
     elsif path.include?("/wordsearch")
-      WordSearch.new(path).go
+      word_search
     elsif path.include?("/game")
-      Game.new(self, path).sort_by_verb
+      game
     else
-      "<iframe src=\"//giphy.com/embed/TUc0ZkK15eiTC\" width=\"480\" height=\"270\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe><p><a href=\"http://giphy.com/gifs/wtf-tim-and-eric-wut-TUc0ZkK15eiTC\"></a></p>404!!!"  
+      error_gif
     end
   end
 
