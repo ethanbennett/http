@@ -21,12 +21,12 @@ class Game
     @verb = parser.verb
     @parameter = parameter
     @number = parser.server.number
-    @guess_counter = parser.guess_counter
+    @guess_counter = parser.server.game_counter
   end
 
   def guess
     if full_request.include? "="
-      @guess_counter += 1
+      # @guess_counter += 1
       full_request.split("?")[1].split("=")[1].to_i
     else
       0
@@ -50,7 +50,8 @@ class Game
   end
 
   def go
-    binding.pry
+    # binding.pry
+    increase_count
     if guess < number
       @response = "<pre>
       <br/>Your guess is too low!
@@ -75,7 +76,7 @@ class Game
 
   def reset_variables
     parser.server.number = Random.rand(100)
-    @guess_counter = 0
+    parser.server.game_counter = 1
   end
 
 end

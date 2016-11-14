@@ -8,6 +8,10 @@ module GameSetup
   #   end
   # end
 
+  def increase_count
+    parser.server.game_counter += 1
+  end
+
   def current_number_of_guesses
     "<pre>Current number of guesses: #{guess_counter}</pre>"
   end

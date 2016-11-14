@@ -4,8 +4,7 @@ require_relative 'parser'
 require_relative 'output'
 
 class Server
-  attr_reader     :client,
-                  :number
+  attr_reader     :client
   attr_accessor   :counter,
                   :looper,
                   :number,
@@ -13,7 +12,7 @@ class Server
 
   def initialize
     @counter    = 0
-    @game_counter = 0
+    @game_counter = 1
     @tcp_server = TCPServer.new(9292)
     @looper     = true
     @number     = Random.rand(100)

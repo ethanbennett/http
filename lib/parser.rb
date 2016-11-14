@@ -6,8 +6,7 @@ class Parser
                 :path,    :protocol,
                 :accept,  :counter,
                 :full_request,
-                :server,
-                :guess_counter
+                :server
 
   def initialize(server, request_lines)
     @server        = server
@@ -18,7 +17,6 @@ class Parser
     @protocol      = request_lines[0].split(" ")[2]
     @accept        = request_lines[3..5]
     @counter       = server.counter
-    @guess_counter = server.game_counter
   end
 
   def paths
@@ -33,7 +31,6 @@ class Parser
     elsif path.include?("/wordsearch")
       WordSearch.new(path).go
     elsif path.include?("/game")
-      @guess_counter += 1
       Game.new(self, path).sort_verb
     else
       "<iframe src=\"//giphy.com/embed/TUc0ZkK15eiTC\" width=\"480\" height=\"270\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe><p><a href=\"http://giphy.com/gifs/wtf-tim-and-eric-wut-TUc0ZkK15eiTC\"></a></p>404!!!"  
