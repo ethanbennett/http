@@ -1,11 +1,8 @@
 module GameSetup
 
   def guess
-    if request.include? "="
-      request.split("?")[1].split("=")[1].to_i
-    else
-      0
-    end
+    value = parser.server.client.read(@unparsed_guess)
+    @guess = value.split(/=/)[-1].to_i
   end
 
   def increase_count
@@ -25,11 +22,7 @@ module GameSetup
   end
 
   def get_response
-    if !@response.nil?
-      @response
-    else
-      current_number_of_guesses
-    end
+    current_number_of_guesses
   end
 
   def low_guess
@@ -44,7 +37,7 @@ module GameSetup
   end
 
   def high_guess
-    guess > number
+    @guess > number
   end
 
   def high_guess_response
@@ -55,7 +48,7 @@ module GameSetup
   end
 
   def correct_guess
-    guess == number
+    @guess == number
   end
 
   def correct_guess_response

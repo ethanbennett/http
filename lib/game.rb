@@ -3,19 +3,19 @@ require './lib/game_setup'
 class Game
   include GameSetup
 
-  attr_reader   :request,  :guess_counter,
-                :parser,   :verb,     
-                :number
+  attr_reader   :guess_counter,  :number,
+                :parser,         :verb
 
-  def initialize(parser, request)
-    @parser        = parser
-    @request       = request
-    @verb          = parser.verb
-    @number        = parser.server.number
-    @guess_counter = parser.server.game_counter
+  def initialize(parser, unparsed_guess)
+    @parser         = parser
+    @verb           = parser.verb
+    @number         = parser.server.number
+    @guess_counter  = parser.server.game_counter
+    @unparsed_guess = unparsed_guess
   end
 
   def go
+    # binding.pry
     increase_count 
     if low_guess
       low_guess_response

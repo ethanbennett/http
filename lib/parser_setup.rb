@@ -19,6 +19,13 @@ module ParserSetup
   def accept_finder
     full_request[3..5]
   end
+
+  def guess_finder
+    isolator = full_request[3].chars
+    isolator.pop
+    isolator.pop
+    isolator.join("")[-1].to_i
+  end
   
   def hello
     "Hello, world! #{counter}"
@@ -41,7 +48,7 @@ module ParserSetup
   end
 
   def game
-    Game.new(self, path).sort_by_verb
+    Game.new(self, guess).sort_by_verb
   end
 
   def error_gif

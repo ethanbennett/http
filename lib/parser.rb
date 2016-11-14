@@ -8,7 +8,8 @@ class Parser
   attr_reader   :host,    :verb,
                 :path,    :protocol,
                 :accept,  :counter,
-                :server,  :full_request
+                :server,  :full_request,
+                :guess
 
   def initialize(server, request_lines)
     @server        = server
@@ -19,6 +20,7 @@ class Parser
     @protocol      = protocol_finder
     @accept        = accept_finder
     @counter       = server.counter
+    @guess         = guess_finder
   end
 
   def paths

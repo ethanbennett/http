@@ -34,7 +34,7 @@ class Server
   def get_request
     request_lines = []
     while line = client.gets and !line.chomp.empty?
-      request_lines << line.chomp
+      request_lines << line
     end
     request_lines
   end
