@@ -22,8 +22,7 @@ module ParserSetup
 
   def guess_finder
     isolator = full_request[3].chars
-    isolator.pop
-    isolator.pop
+    2.times { isolator.pop }
     isolator.join("")[-1].to_i
   end
   

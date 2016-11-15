@@ -15,7 +15,6 @@ class Game
   end
 
   def go
-    # binding.pry
     increase_count 
     if low_guess
       low_guess_response
