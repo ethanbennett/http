@@ -31,6 +31,7 @@ class Parser
     elsif path == "/datetime"
       datetime
     elsif path == "/shutdown"
+      server.looper = false
       shutdown
     elsif path.include?("/wordsearch")
       word_search
