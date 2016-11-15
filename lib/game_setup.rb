@@ -16,6 +16,8 @@ module GameSetup
   def sort_by_verb
     if verb.eql?('GET')
       get_response
+    elsif verb.eql?('POST') && @unparsed_guess.eql?(0)
+      "<pre>Good Luck!</pre>"
     elsif verb.eql?('POST')
       go
     end
