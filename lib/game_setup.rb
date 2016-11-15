@@ -1,7 +1,7 @@
 module GameSetup
 
   def guess
-    value = parser.server.client.read(@unparsed_guess)
+    value  = parser.server.client.read(@unparsed_guess)
     @guess = value.split(/=/)[-1].to_i
   end
 

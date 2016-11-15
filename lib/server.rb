@@ -1,7 +1,6 @@
 require 'socket'
-require 'pry'
-require_relative 'parser'
-require_relative 'output'
+require './lib/parser'
+require './lib/output'
 
 class Server
   attr_reader     :client
