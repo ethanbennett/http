@@ -19,7 +19,6 @@ class Parser
     @protocol       = protocol_finder
     @accept         = accept_finder
     @guess          = guess_finder
-    # require 'pry'; binding.pry
   end
 
   def paths
