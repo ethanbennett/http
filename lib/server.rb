@@ -1,7 +1,6 @@
 require 'socket'
-require 'pry'
-require_relative 'parser'
-require_relative 'output'
+require './lib/parser'
+require './lib/output'
 
 class Server
   attr_reader     :client
@@ -34,7 +33,7 @@ class Server
   def get_request
     request_lines = []
     while line = client.gets and !line.chomp.empty?
-      request_lines << line.chomp
+      request_lines << line
     end
     request_lines
   end
