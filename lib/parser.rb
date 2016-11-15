@@ -7,9 +7,8 @@ class Parser
   
   attr_reader   :host,    :verb,
                 :path,    :protocol,
-                :accept,  :counter,
-                :server,  :full_request,
-                :guess
+                :accept,  :guess,
+                :server,  :full_request
 
   def initialize(server, request_lines)
     @server         = server
@@ -19,8 +18,8 @@ class Parser
     @path           = path_finder
     @protocol       = protocol_finder
     @accept         = accept_finder
-    @counter        = server.counter
     @guess          = guess_finder
+    # require 'pry'; binding.pry
   end
 
   def paths

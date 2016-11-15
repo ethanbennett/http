@@ -27,11 +27,11 @@ module ParserSetup
   end
   
   def hello
-    "Hello, world! #{counter}"
+    "Hello, world! #{server.counter}"
   end
 
   def root
-    "Root"
+    ""
   end
 
   def datetime
@@ -39,7 +39,7 @@ module ParserSetup
   end
 
   def shutdown
-    "Count: #{counter}"
+    "Count: #{server.counter}"
   end
 
   def word_search

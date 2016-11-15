@@ -1,5 +1,3 @@
-require 'pry'
-
 class Output
   attr_reader   :client,    :parser,
                 :verb,      :path,
