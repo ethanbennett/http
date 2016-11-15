@@ -12,15 +12,15 @@ class Parser
                 :guess
 
   def initialize(server, request_lines)
-    @server        = server
-    @full_request  = request_lines
-    @host          = host_finder
-    @verb          = verb_finder
-    @path          = path_finder
-    @protocol      = protocol_finder
-    @accept        = accept_finder
-    @counter       = server.counter
-    @guess         = guess_finder
+    @server         = server
+    @full_request   = request_lines
+    @host           = host_finder
+    @verb           = verb_finder
+    @path           = path_finder
+    @protocol       = protocol_finder
+    @accept         = accept_finder
+    @counter        = server.counter
+    @guess          = guess_finder
   end
 
   def paths
@@ -37,11 +37,11 @@ class Parser
     elsif path.eql?("/game")
       game
     elsif path.eql?("/start_game")
-      error_gif + "\n403 FORBIDDEN!!!"
+      forbidden
     elsif path.eql?("/force_error")
-      error_gif + "500 : " + generate_error
+      system_error
     else
-      "404 Unknown!!!" + error_gif
+      unknown
     end
   end
 

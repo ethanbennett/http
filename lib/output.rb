@@ -25,11 +25,9 @@ class Output
   def response
     client.puts select_header
     client.puts output
-    # binding.pry
   end
 
   def select_header
-    # binding.pry
     if path.eql?("/start_game") && server.game_started.eql?(false)
       redirect_header
     else

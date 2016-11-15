@@ -46,6 +46,18 @@ module ParserSetup
     WordSearch.new(path).go
   end
 
+  def forbidden
+    error_gif + "\n403 FORBIDDEN!!!"
+  end
+
+  def system_error
+    error_gif + "500 : " + generate_error
+  end
+
+  def unknown
+    error_gif + "\n404 Unknown!!!"
+  end
+
   def game
     Game.new(self, guess).sort_by_verb
   end

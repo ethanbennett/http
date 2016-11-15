@@ -1,7 +1,6 @@
 module GameSetup
 
   def guess
-    # require 'pry'; binding.pry
     value  = parser.server.client.read(@unparsed_guess)
     @guess = value.split(/=/)[-1].to_i
   end
@@ -25,7 +24,11 @@ module GameSetup
   end
 
   def get_response
-    current_number_of_guesses
+    if responses[-1].nil?
+      current_number_of_guesses
+    else
+      responses[-1]
+    end
   end
 
   def low_guess
@@ -33,10 +36,11 @@ module GameSetup
   end
 
   def low_guess_response
-    "<pre>
+    responses << "<pre>
     <br/>Your guess is too low!
     <br/>Current number of guesses: #{guess_counter}
     </pre>"
+    responses[-1]
   end
 
   def high_guess
@@ -44,10 +48,11 @@ module GameSetup
   end
 
   def high_guess_response
-    "<pre>
+    responses << "<pre>
     <br/>Your guess is too high!
     <br/>Current number of guesses: #{guess_counter}
     </pre>"
+    responses[-1]
   end
 
   def correct_guess
@@ -55,12 +60,12 @@ module GameSetup
   end
 
   def correct_guess_response
-    response = "<pre>
+    responses << "<pre>
     <br/>You guessed correctly!
     <br/>It took you this many tries: #{guess_counter}
     </pre>"
     reset_variables
-    response
+    responses[-1]
   end
 
   def reset_variables

@@ -4,15 +4,17 @@ class Game
   include GameSetup
 
   attr_reader   :guess_counter,  :number,
-                :parser,         :verb
+                :parser,         :verb,
+                :responses
 
   def initialize(parser, unparsed_guess)
+    parser.server.game_started = true
     @parser         = parser
     @verb           = parser.verb
     @number         = parser.server.number
     @guess_counter  = parser.server.game_counter
     @unparsed_guess = unparsed_guess
-    parser.server.game_started = true
+    @responses      = parser.server.game_responses
   end
 
   def go

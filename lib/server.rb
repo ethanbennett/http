@@ -6,7 +6,7 @@ class Server
   attr_reader     :client
   attr_accessor   :counter,  :game_counter,
                   :looper,   :game_started,
-                  :number
+                  :number,   :game_responses
                   
   def initialize
     @counter        = 0
@@ -15,6 +15,7 @@ class Server
     @looper         = true
     @number         = Random.rand(100)
     @game_started   = false
+    @game_responses = []
   end
 
   def run
@@ -42,7 +43,6 @@ class Server
 
   def result(output)
     output.response
-    # @looper = false if @parser.paths.include?("Count: #{counter}")  # Comment this line out before running tests
   end
 end
 
