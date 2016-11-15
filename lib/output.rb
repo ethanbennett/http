@@ -23,9 +23,7 @@ class Output
   def response
     client.puts select_header
     client.puts output
-    if server.looper.eql?(false)
-      client.shutdown
-    end
+    client.shutdown if server.looper.eql?(false)
   end
 
   def select_header
