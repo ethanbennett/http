@@ -1,6 +1,7 @@
 module GameSetup
 
   def guess
+    # require 'pry'; binding.pry
     value  = parser.server.client.read(@unparsed_guess)
     @guess = value.split(/=/)[-1].to_i
   end

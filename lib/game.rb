@@ -12,6 +12,7 @@ class Game
     @number         = parser.server.number
     @guess_counter  = parser.server.game_counter
     @unparsed_guess = unparsed_guess
+    parser.server.game_started = true
   end
 
   def go

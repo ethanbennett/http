@@ -34,10 +34,14 @@ class Parser
       shutdown
     elsif path.include?("/wordsearch")
       word_search
-    elsif path.include?("/game")
+    elsif path.eql?("/game")
       game
+    elsif path.eql?("/start_game")
+      error_gif + "\n403 FORBIDDEN!!!"
+    elsif path.eql?("/force_error")
+      error_gif + "500 : " + generate_error
     else
-      error_gif
+      "404 Unknown!!!" + error_gif
     end
   end
 
