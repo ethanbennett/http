@@ -1,10 +1,8 @@
 class Output
   attr_reader   :client,    :parser,
-                :verb,      :path,
-                :protocol,  :host,
-                :accept,    :message,
-                :output,    :response_code,
-                :server
+                :message,   :server,
+                :output,    :response_code
+                
 
   def initialize(client, parser, server)
     @server        = server
@@ -27,7 +25,7 @@ class Output
   end
 
   def select_header
-    if path.eql?("/start_game") && server.game_started.eql?(false)
+    if @path.eql?("/start_game") && server.game_started.eql?(false)
       redirect_header
     else
       normal_header
@@ -52,7 +50,7 @@ class Output
   end
 
   def select_response_code
-    if path.eql?("/start_game")
+    if @path.eql?("/start_game")
       "403 Forbidden"
     elsif message.include?("500")
       "500 Internal Server Error"
@@ -66,13 +64,13 @@ class Output
   def output_string
     "<html><head></head><h1>#{message}</h1></html>
     <pre>
-    Verb: #{verb}
-    Path: #{path}
-    Protocol: #{protocol}
-    Host: #{host}
+    Verb: #{@verb}
+    Path: #{@path}
+    Protocol: #{@protocol}
+    Host: #{@host}
     Port: 9292
     Origin: localhost
-    Accept: #{accept}
+    Accept: #{@accept}
     </pre>"
   end
 
