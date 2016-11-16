@@ -5,8 +5,9 @@ class Game
   include GameSetup
   include GuessResponses
 
-  attr_reader   :guess_counter,  :number,
-                :parser,         :responses
+  attr_reader   :guess_counter,   :number,
+                :parser,          :responses,
+                :unparsed_guess,  :verb
 
   def initialize(parser, number, counter, responses)
     @parser         = parser

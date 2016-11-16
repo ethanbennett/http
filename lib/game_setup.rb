@@ -5,11 +5,11 @@ module GameSetup
   end
 
   def sort_by_verb
-    if @verb.eql?('GET')
+    if verb.eql?('GET')
       get_response
-    elsif @verb.eql?('POST') && @unparsed_guess.eql?(0)
+    elsif verb.eql?('POST') && unparsed_guess.eql?(0)
       "<pre>Good Luck!</pre>"
-    elsif @verb.eql?('POST')
+    elsif verb.eql?('POST')
       go
     end
   end
@@ -23,7 +23,7 @@ module GameSetup
   end
 
   def guess
-    value  = parser.server.client.read(@unparsed_guess)
+    value  = parser.server.client.read(unparsed_guess)
     @guess = value.split(/=/)[-1].to_i
   end
 
