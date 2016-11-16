@@ -59,7 +59,9 @@ module ParserSetup
   end
 
   def game
-    Game.new(self, guess).sort_by_verb
+    server.game_counter += 1
+    server.game_started = true
+    Game.new(self, server.number, server.game_counter, server.game_responses).sort_by_verb
   end
 
   def error_gif

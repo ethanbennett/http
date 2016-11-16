@@ -10,12 +10,12 @@ class Server
                   
   def initialize
     @counter        = 0
-    @game_counter   = 1
     @tcp_server     = TCPServer.new(9292)
     @looper         = true
     @number         = Random.rand(100)
     @game_started   = false
     @game_responses = []
+    @game_counter   = 0
   end
 
   def run

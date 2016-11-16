@@ -1,24 +1,24 @@
 require './lib/game_setup'
+require './lib/guess_responses'
 
 class Game
   include GameSetup
+  include GuessResponses
 
-  attr_reader   :guess_counter,  :number,
+  attr_reader   :unparsed_guess, :number,
                 :parser,         :verb,
-                :responses
+                :responses,      :guess_counter
 
-  def initialize(parser, unparsed_guess)
-    parser.server.game_started = true
+  def initialize(parser, number, counter, responses)
     @parser         = parser
     @verb           = parser.verb
-    @number         = parser.server.number
-    @guess_counter  = parser.server.game_counter
-    @unparsed_guess = unparsed_guess
-    @responses      = parser.server.game_responses
+    @number         = number
+    @unparsed_guess = parser.guess
+    @responses      = responses
+    @guess_counter  = counter
   end
 
   def go
-    increase_count 
     if low_guess
       low_guess_response
     elsif high_guess
