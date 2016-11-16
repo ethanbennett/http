@@ -61,7 +61,7 @@ module ParserSetup
   def game
     server.game_counter += 1
     server.game_started = true
-    Game.new(self, server.number, server.game_counter, server.game_responses).sort_by_verb
+    initialize_game
   end
 
   def error_gif
@@ -72,6 +72,10 @@ module ParserSetup
     raise SystemError
     rescue => detail
     detail.backtrace.join("\n")
+  end
+
+  def initialize_game
+    Game.new(self, server.number, server.game_counter, server.game_responses).sort_by_verb
   end
 
 end
