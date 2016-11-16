@@ -7,20 +7,18 @@ class Parser
   
   attr_reader   :host,    :verb,
                 :path,    :protocol,
-                :accept,  :counter,
-                :server,  :full_request,
-                :guess
+                :accept,  :guess,
+                :server,  :full_request
 
   def initialize(server, request_lines)
-    @server        = server
-    @full_request  = request_lines
-    @host          = host_finder
-    @verb          = verb_finder
-    @path          = path_finder
-    @protocol      = protocol_finder
-    @accept        = accept_finder
-    @counter       = server.counter
-    @guess         = guess_finder
+    @server         = server
+    @full_request   = request_lines
+    @host           = host_finder
+    @verb           = verb_finder
+    @path           = path_finder
+    @protocol       = protocol_finder
+    @accept         = accept_finder
+    @guess          = guess_finder
   end
 
   def paths
@@ -31,13 +29,18 @@ class Parser
     elsif path == "/datetime"
       datetime
     elsif path == "/shutdown"
+      server.looper = false
       shutdown
     elsif path.include?("/wordsearch")
       word_search
-    elsif path.include?("/game")
+    elsif path.eql?("/game")
       game
+    elsif path.eql?("/start_game")
+      forbidden
+    elsif path.eql?("/force_error")
+      system_error
     else
-      error_gif
+      unknown
     end
   end
 
