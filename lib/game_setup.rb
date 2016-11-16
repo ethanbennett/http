@@ -27,14 +27,6 @@ module GameSetup
     @guess = value.split(/=/)[-1].to_i
   end
 
-  def guess_counter
-    if parser.server.nil?
-      0
-    else 
-      parser.server.game_counter
-    end
-  end
-
   def reset_variables
     parser.server.number = Random.rand(100)
     parser.server.game_counter = 0
